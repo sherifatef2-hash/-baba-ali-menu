@@ -1,1 +1,1083 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم بابا علي | بيتزا وفطير شرقي ومشلتت - لوران الإسكندرية</title>
+    <!-- تحميل Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- خطوط عربية أنيقة: Cairo و Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        charcoal: {
+                            950: '#0d0d0f',
+                            900: '#141417',
+                            800: '#1e1e23',
+                            700: '#2a2a32',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        crimson: {
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Cairo', sans-serif;
+        }
+        /* إخفاء شريط التمرير الأفقي في أزرار الأقسام مع بقاء التمرير سلساً */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* تأثير توهج خفيف للكروت */
+        .menu-card {
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px -8px rgba(245, 158, 11, 0.2);
+        }
+        /* تعويض ارتفاع الشريط العلوي عند الانتقال للأقسام */
+        section[id] {
+            scroll-margin-top: 135px;
+        }
+    </style>
+</head>
+<body class="bg-charcoal-950 text-gray-100 antialiased selection:bg-gold-500 selection:text-charcoal-950 pb-28">
+
+    <!-- الهيدر الرئيسي -->
+    <header class="relative bg-gradient-to-b from-crimson-800 via-charcoal-900 to-charcoal-950 border-b border-gold-500/20 overflow-hidden">
+        <!-- زخرفة خلفية خفيفة -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#fbbf24 1px, transparent 1px); background-size: 24px 24px;"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 py-6 sm:py-8 relative z-10">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <!-- الشعار والاسم -->
+                <div class="flex items-center gap-4 text-center sm:text-right">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-gold-400 to-crimson-600 p-0.5 shadow-lg shadow-gold-500/20 shrink-0">
+                        <div class="w-full h-full bg-charcoal-900 rounded-2xl flex items-center justify-center flex-col">
+                            <i class="fa-solid fa-pizza-slice text-gold-400 text-2xl sm:text-3xl mb-0.5"></i>
+                            <span class="text-[10px] font-extrabold text-gold-400 tracking-wider">BABA ALI</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gold-500/15 border border-gold-500/30 text-gold-400 text-xs font-bold mb-1">
+                            <i class="fa-solid fa-fire text-orange-500"></i>
+                            <span>أصل الفطير والبيتزا في الإسكندرية</span>
+                        </div>
+                        <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                            مطعم <span class="text-gold-400">بابا علي</span>
+                        </h1>
+                        <p class="text-gray-300 text-xs sm:text-sm mt-1 flex items-center justify-center sm:justify-start gap-2">
+                            <i class="fa-solid fa-location-dot text-crimson-500"></i>
+                            <span>لوران - الإسكندرية | توصيل سريع وساخن</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- أزرار سريعة: طرق الدفع، تتبع الطلب، فيسبوك، ماسنجر، والسلة -->
+                <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2">
+                    <button onclick="openPaymentModal()" class="bg-purple-600/90 hover:bg-purple-500 text-white text-xs sm:text-sm font-extrabold px-3 py-2 rounded-2xl border border-purple-400/30 shadow-md transition flex items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-wallet text-gold-400"></i>
+                        <span>طرق الدفع</span>
+                    </button>
+
+                    <button onclick="openTrackModal()" class="bg-charcoal-800 hover:bg-charcoal-700 text-gold-400 text-xs sm:text-sm font-extrabold px-3 py-2 rounded-2xl border border-gold-500/30 shadow-md transition flex items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-motorcycle text-emerald-400"></i>
+                        <span>تتبع الطلب</span>
+                    </button>
+
+                    <!-- رابط صفحة الفيسبوك (استبدل الرابط برابط صفحتك الفعلي) -->
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs sm:text-sm font-extrabold px-3 py-2 rounded-2xl shadow-md transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span class="hidden md:inline">فيسبوك</span>
+                    </a>
+
+                    <!-- زر تواصل ماسنجر (استبدل الرابط برابط ماسنجر صفحتك مثل https://m.me/username) -->
+                    <a href="https://m.me/" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-[#00B2FF] to-[#006AFF] hover:brightness-110 text-white text-xs sm:text-sm font-extrabold px-3 py-2 rounded-2xl shadow-md transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-facebook-messenger"></i>
+                        <span class="hidden md:inline">ماسنجر</span>
+                    </a>
+
+                    <button onclick="toggleCart()" class="relative bg-gold-500 hover:bg-gold-400 text-charcoal-950 font-extrabold px-3.5 py-2 rounded-2xl shadow-lg shadow-gold-500/20 transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-bag-shopping text-base sm:text-lg"></i>
+                        <span class="hidden sm:inline text-xs sm:text-sm">السلة</span>
+                        <span id="header-cart-count" class="bg-crimson-700 text-white text-xs font-black px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+            <!-- بيانات العميل وطريقة الدفع وأزرار الإرسال -->
+            <div class="p-4 bg-charcoal-950 border-t border-gray-800 space-y-3">
+                <!-- حقول بيانات التوصيل -->
+                <div class="grid grid-cols-1 gap-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="customer-name" placeholder="الاسم" class="w-full bg-charcoal-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none focus:border-gold-500">
+                        <input type="tel" id="customer-phone" placeholder="رقم الموبايل" class="w-full bg-charcoal-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none focus:border-gold-500">
+                    </div>
+                    <input type="text" id="customer-address" placeholder="العنوان بالتفصيل (مثال: لوران، عزبة سعد، سموحة...)" class="w-full bg-charcoal-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none focus:border-gold-500">
+                    <input type="text" id="customer-notes" placeholder="ملاحظات إضافية (مثال: زيادة جبنة، بدون فلفل...)" class="w-full bg-charcoal-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none focus:border-gold-500">
+                </div>
+
+                <!-- اختيار طريقة الدفع داخل السلة -->
+                <div class="bg-charcoal-900 border border-gray-800 rounded-xl p-2.5 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-300">طريقة الدفع:</span>
+                        <button type="button" onclick="openPaymentModal()" class="text-[11px] font-bold text-purple-400 hover:underline cursor-pointer">
+                            عرض رقم التحويل (01151451784)
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1.5">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="كاش عند الاستلام" checked onchange="togglePaymentHint()" class="peer sr-only">
+                            <div class="text-center py-1.5 px-1 rounded-lg border border-gray-700 bg-charcoal-800 text-[11px] font-bold text-gray-300 peer-checked:bg-gold-500 peer-checked:text-charcoal-950 peer-checked:border-gold-500 transition">
+                                💵 كاش
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="إنستاباي (01151451784)" onchange="togglePaymentHint()" class="peer sr-only">
+                            <div class="text-center py-1.5 px-1 rounded-lg border border-gray-700 bg-charcoal-800 text-[11px] font-bold text-gray-300 peer-checked:bg-purple-600 peer-checked:text-white peer-checked:border-purple-500 transition">
+                                ⚡ إنستاباي
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="محفظة إلكترونية (01151451784)" onchange="togglePaymentHint()" class="peer sr-only">
+                            <div class="text-center py-1.5 px-1 rounded-lg border border-gray-700 bg-charcoal-800 text-[11px] font-bold text-gray-300 peer-checked:bg-crimson-600 peer-checked:text-white peer-checked:border-crimson-500 transition">
+                                📱 محفظة
+                            </div>
+                        </label>
+                    </div>
+                    <div id="wallet-inline-box" class="hidden bg-purple-950/50 border border-purple-500/40 rounded-lg p-2 flex items-center justify-between text-xs">
+                        <div>
+                            <span class="text-gray-300">حول على رقم: </span>
+                            <span class="font-black text-gold-400 tracking-wider" dir="ltr">01151451784</span>
+                        </div>
+                        <button type="button" onclick="copyWalletNumber()" class="bg-purple-600 hover:bg-purple-500 text-white px-2.5 py-1 rounded-md text-[11px] font-bold cursor-pointer">
+                            نسخ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- الإجمالي -->
+                <div class="flex items-center justify-between py-1.5 border-t border-gray-800">
+                    <span class="text-sm font-bold text-gray-300">الإجمالي الكلي:</span>
+                    <div class="text-xl font-black text-gold-400">
+                        <span id="cart-modal-total">0</span> <span class="text-xs">ج.م</span>
+                    </div>
+                </div>
+
+                <!-- أزرار إرسال الطلب عبر واتساب أو ماسنجر -->
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="sendOrder('whatsapp')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2.5 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>اطلب واتساب</span>
+                    </button>
+                    <button onclick="sendOrder('messenger')" class="bg-gradient-to-r from-[#00B2FF] to-[#006AFF] hover:brightness-110 text-white font-extrabold py-2.5 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition cursor-pointer">
+                        <i class="fa-brands fa-facebook-messenger text-lg"></i>
+                        <span>اطلب ماسنجر</span>
+                    </button>
+                </div>
+                <button onclick="copyOrderText()" class="w-full bg-charcoal-800 hover:bg-charcoal-700 text-gray-300 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 border border-gray-700 transition cursor-pointer">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>نسخ تفاصيل الطلب</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر (روابط التواصل وطرق الدفع وتتبع الطلب) -->
+    <footer class="max-w-6xl mx-auto px-4 pt-6 pb-10 border-t border-gray-800/80 text-center space-y-4">
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <button onclick="openPaymentModal()" class="bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/40 px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 transition cursor-pointer">
+                <i class="fa-solid fa-wallet text-gold-400"></i>
+                <span>طرق الدفع (إنستاباي / محفظة: 01151451784)</span>
+            </button>
+            <button onclick="openTrackModal()" class="bg-charcoal-800 hover:bg-charcoal-700 text-gold-400 border border-gold-500/30 px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 transition cursor-pointer">
+                <i class="fa-solid fa-motorcycle text-emerald-400"></i>
+                <span>تتبع حالة طلبك</span>
+            </button>
+            <!-- رابط صفحة الفيسبوك -->
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="bg-[#1877F2]/20 hover:bg-[#1877F2]/30 text-blue-300 border border-[#1877F2]/40 px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 transition">
+                <i class="fa-brands fa-facebook text-[#1877F2] text-sm"></i>
+                <span>صفحتنا على فيسبوك</span>
+            </a>
+            <!-- رابط تواصل ماسنجر -->
+            <a href="https://m.me/" target="_blank" rel="noopener noreferrer" class="bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/40 px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 transition">
+                <i class="fa-brands fa-facebook-messenger text-sky-400 text-sm"></i>
+                <span>تواصل معنا ماسنجر</span>
+            </a>
+        </div>
+        <p class="text-xs text-gray-500">جميع الحقوق محفوظة © مطعم بابا علي - لوران، الإسكندرية</p>
+    </footer>
+
+    <!-- نافذة طرق الدفع (إنستاباي ومحفظة إلكترونية 01151451784) -->
+    <div id="payment-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closePaymentModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative w-full max-w-md bg-charcoal-900 border border-purple-500/40 rounded-3xl p-6 shadow-2xl space-y-5 z-10">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-10 h-10 rounded-2xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-lg">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-lg font-black text-white">طرق الدفع الإلكتروني</h3>
+                        <p class="text-xs text-gray-400">دفع سريع وآمن عبر إنستاباي أو المحفظة</p>
+                    </div>
+                </div>
+                <button onclick="closePaymentModal()" class="w-8 h-8 rounded-xl bg-charcoal-800 hover:bg-crimson-600 text-gray-300 hover:text-white flex items-center justify-center transition cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- بطاقة الرقم الموحد -->
+            <div class="bg-gradient-to-br from-purple-900/50 via-charcoal-800 to-charcoal-950 border border-purple-500/40 rounded-2xl p-4 text-center space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-extrabold">
+                    <span>⚡ InstaPay إنستاباي</span>
+                    <span>•</span>
+                    <span>📱 محفظة إلكترونية</span>
+                </div>
+                <div class="text-xs text-gray-300">رقم التحويل المعتمد لمطعم بابا علي:</div>
+                <div class="bg-charcoal-950 border border-gray-700 rounded-xl py-3 px-4 flex items-center justify-between">
+                    <span class="text-xl sm:text-2xl font-black text-gold-400 tracking-widest select-all" dir="ltr">01151451784</span>
+                    <button onclick="copyWalletNumber()" class="bg-gold-500 hover:bg-gold-400 text-charcoal-950 font-extrabold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition cursor-pointer">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>نسخ الرقم</span>
+                    </button>
+                </div>
+                <p class="text-[11px] text-gray-400 leading-relaxed">
+                    يدعم التحويل من <strong class="text-white">إنستاباي (InstaPay)</strong> وجميع المحافظ الإلكترونية (<strong class="text-white">فودافون كاش • اتصالات كاش • أورنج كاش • وي باي</strong>).
+                </p>
+            </div>
+
+            <div class="bg-charcoal-800/70 border border-gray-700/70 rounded-xl p-3 text-xs text-gray-300 flex items-start gap-2.5">
+                <i class="fa-solid fa-circle-info text-gold-400 mt-0.5"></i>
+                <span>بعد التحويل، يرجى إرسال صورة إيصال التحويل (سكرين شوت) مع تفاصيل طلبك عبر الواتساب أو الماسنجر لتأكيد الطلب فوراً.</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5">
+                <a href="https://wa.me/201151451784" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>إرسال الإيصال واتساب</span>
+                </a>
+                <a href="https://m.me/" target="_blank" rel="noopener noreferrer" class="bg-[#006AFF] hover:brightness-110 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                    <i class="fa-brands fa-facebook-messenger text-base"></i>
+                    <span>إرسال الإيصال ماسنجر</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تتبع الطلب (Order Tracking Modal) -->
+    <div id="track-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeTrackModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative w-full max-w-md bg-charcoal-900 border border-gold-500/40 rounded-3xl p-6 shadow-2xl space-y-5 z-10">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-10 h-10 rounded-2xl bg-gold-500/15 border border-gold-500/40 flex items-center justify-center text-gold-400 text-lg">
+                        <i class="fa-solid fa-motorcycle"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-lg font-black text-white">تتبع حالة طلبك</h3>
+                        <p class="text-xs text-gray-400">تابع خطوات تحضير وتوصيل أوردرك لحظة بلحظة</p>
+                    </div>
+                </div>
+                <button onclick="closeTrackModal()" class="w-8 h-8 rounded-xl bg-charcoal-800 hover:bg-crimson-600 text-gray-300 hover:text-white flex items-center justify-center transition cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- البحث برقم الطلب أو رقم الموبايل -->
+            <div class="flex gap-2">
+                <input type="text" id="track-input" placeholder="أدخل رقم الطلب (مثال: BA-1024) أو رقم موبايلك" class="flex-1 bg-charcoal-800 border border-gray-700 focus:border-gold-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder-gray-400 outline-none">
+                <button onclick="searchOrderStatus()" class="bg-gold-500 hover:bg-gold-400 text-charcoal-950 font-extrabold px-4 py-2.5 rounded-xl text-xs transition cursor-pointer">
+                    تتبع
+                </button>
+            </div>
+
+            <!-- عرض حالة الطلب -->
+            <div id="track-result-box" class="bg-charcoal-950 border border-gray-800 rounded-2xl p-4 space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-2.5">
+                    <div>
+                        <div class="text-[11px] text-gray-400">رقم الطلب الحالي:</div>
+                        <div id="tracked-order-id" class="text-sm font-black text-gold-400">لا يوجد طلب نشط بعد</div>
+                    </div>
+                    <span id="tracked-eta" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                        الوقت المتوقع: 30 - 45 دقيقة
+                    </span>
+                </div>
+
+                <!-- خطوات التتبع -->
+                <div class="space-y-3 relative pr-4 border-r-2 border-gray-800" id="track-steps">
+                    <div class="relative">
+                        <span id="step-dot-1" class="absolute -right-[23px] top-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20"></span>
+                        <div class="text-xs font-extrabold text-white">1. تم استلام الطلب وتأكيده</div>
+                        <div class="text-[11px] text-gray-400">وصل طلبك إلى مطبخ مطعم بابا علي بلوران</div>
+                    </div>
+                    <div class="relative">
+                        <span id="step-dot-2" class="absolute -right-[23px] top-1 w-3.5 h-3.5 rounded-full bg-gold-400 animate-pulse ring-4 ring-gold-400/20"></span>
+                        <div class="text-xs font-extrabold text-gold-400">2. جاري التحضير والخبز في الفرن</div>
+                        <div class="text-[11px] text-gray-400">يتم تجهيز الفطير والبيتزا طازجة وساخنة</div>
+                    </div>
+                    <div class="relative">
+                        <span id="step-dot-3" class="absolute -right-[23px] top-1 w-3.5 h-3.5 rounded-full bg-gray-700"></span>
+                        <div class="text-xs font-bold text-gray-400">3. خرج مع مندوب التوصيل</div>
+                        <div class="text-[11px] text-gray-500">الطيار في طريقه لعنوانك الآن</div>
+                    </div>
+                    <div class="relative">
+                        <span id="step-dot-4" class="absolute -right-[23px] top-1 w-3.5 h-3.5 rounded-full bg-gray-700"></span>
+                        <div class="text-xs font-bold text-gray-400">4. تم التوصيل بالهنا والشفا</div>
+                        <div class="text-[11px] text-gray-500">نتمنى لك وجبة شهية من بابا علي</div>
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-gray-800 flex items-center justify-between text-xs">
+                    <span class="text-gray-400">تحتاج مساعدة في طلبك؟</span>
+                    <a href="https://wa.me/201151451784" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline font-bold flex items-center gap-1">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>تواصل مع الفرع</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إشعار Toast مخصص (بديل alert) -->
+    <div id="toast-box" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 -translate-y-4">
+        <div class="bg-charcoal-800 border border-gold-500/50 text-white px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm font-bold">
+            <i class="fa-solid fa-circle-check text-gold-400 text-base"></i>
+            <span id="toast-message">تمت الإضافة إلى السلة</span>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * رسومات SVG عالية الدقة ومخصصة لعلب المشروبات الغازية (بيبسي، ميرندا، سفن أب) ومياه معدنية
+         * مصممة بدقة لتبدو واقعية وجذابة دون الاعتماد على روابط صور خارجية قد تتعطل
+         */
+        const CAN_SVGS = {
+            pepsi: `
+                <svg viewBox="0 0 140 200" class="w-28 h-36 mx-auto drop-shadow-[0_10px_15px_rgba(0,75,147,0.5)]" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="pepsiBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#002b5c"/>
+                            <stop offset="25%" stop-color="#005cb9"/>
+                            <stop offset="50%" stop-color="#0072ce"/>
+                            <stop offset="80%" stop-color="#004b93"/>
+                            <stop offset="100%" stop-color="#001f42"/>
+                        </linearGradient>
+                        <linearGradient id="metalRim" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#9ca3af"/>
+                            <stop offset="30%" stop-color="#f3f4f6"/>
+                            <stop offset="60%" stop-color="#d1d5db"/>
+                            <stop offset="100%" stop-color="#6b7280"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- ظل أسفل العلبة -->
+                    <ellipse cx="70" cy="188" rx="40" ry="7" fill="rgba(0,0,0,0.45)"/>
+                    <!-- الغطاء العلوي المعدني -->
+                    <path d="M36 22 L42 14 L98 14 L104 22 Z" fill="url(#metalRim)"/>
+                    <rect x="34" y="21" width="72" height="5" rx="2.5" fill="url(#metalRim)"/>
+                    <!-- جسم العلبة الأزرق -->
+                    <rect x="34" y="26" width="72" height="150" rx="6" fill="url(#pepsiBody)"/>
+                    <!-- لمعة إضاءة طولية -->
+                    <rect x="42" y="26" width="8" height="150" fill="rgba(255,255,255,0.16)"/>
+                    <!-- دائرة شعار بيبسي الشهير -->
+                    <circle cx="70" cy="92" r="26" fill="#ffffff"/>
+                    <!-- النصف العلوي الأحمر -->
+                    <path d="M46 88 A24 24 0 0 1 94 84 Q72 95 46 88 Z" fill="#e32934"/>
+                    <!-- النصف السفلي الأزرق -->
+                    <path d="M47 97 Q73 106 93 93 A24 24 0 0 1 47 97 Z" fill="#004b93"/>
+                    <!-- كلمة PEPSI -->
+                    <text x="70" y="138" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-weight="900" font-size="16" letter-spacing="1.5">PEPSI</text>
+                    <text x="70" y="153" text-anchor="middle" fill="#93c5fd" font-family="Cairo, sans-serif" font-weight="700" font-size="10">330 مل</text>
+                    <!-- القاعدة المعدنية -->
+                    <path d="M34 176 L42 184 L98 184 L106 176 Z" fill="url(#metalRim)"/>
+                </svg>
+            `,
+            mirinda: `
+                <svg viewBox="0 0 140 200" class="w-28 h-36 mx-auto drop-shadow-[0_10px_15px_rgba(249,115,22,0.5)]" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="mirindaBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#c2410c"/>
+                            <stop offset="28%" stop-color="#f97316"/>
+                            <stop offset="52%" stop-color="#fb923c"/>
+                            <stop offset="82%" stop-color="#ea580c"/>
+                            <stop offset="100%" stop-color="#9a3412"/>
+                        </linearGradient>
+                        <linearGradient id="metalRimM" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#9ca3af"/>
+                            <stop offset="30%" stop-color="#f3f4f6"/>
+                            <stop offset="60%" stop-color="#d1d5db"/>
+                            <stop offset="100%" stop-color="#6b7280"/>
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="70" cy="188" rx="40" ry="7" fill="rgba(0,0,0,0.45)"/>
+                    <path d="M36 22 L42 14 L98 14 L104 22 Z" fill="url(#metalRimM)"/>
+                    <rect x="34" y="21" width="72" height="5" rx="2.5" fill="url(#metalRimM)"/>
+                    <!-- جسم العلبة البرتقالي -->
+                    <rect x="34" y="26" width="72" height="150" rx="6" fill="url(#mirindaBody)"/>
+                    <rect x="42" y="26" width="8" height="150" fill="rgba(255,255,255,0.2)"/>
+                    <!-- زخرفة برتقالة وفقاعات -->
+                    <circle cx="70" cy="86" r="24" fill="#16a34a" stroke="#ffffff" stroke-width="2.5"/>
+                    <circle cx="70" cy="86" r="18" fill="#facc15"/>
+                    <!-- ورقة شجر خضراء -->
+                    <path d="M70 62 Q82 50 90 58 Q80 66 70 62 Z" fill="#22c55e"/>
+                    <!-- شعار MIRINDA -->
+                    <rect x="38" y="80" width="64" height="20" rx="4" fill="#15803d" transform="rotate(-8 70 90)"/>
+                    <text x="70" y="94" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-weight="900" font-size="13" letter-spacing="0.8" transform="rotate(-8 70 90)">MIRINDA</text>
+                    <text x="70" y="128" text-anchor="middle" fill="#fff7ed" font-family="Cairo, sans-serif" font-weight="800" font-size="12">برتقال</text>
+                    <text x="70" y="148" text-anchor="middle" fill="#fed7aa" font-family="Cairo, sans-serif" font-weight="700" font-size="10">330 مل</text>
+                    <path d="M34 176 L42 184 L98 184 L106 176 Z" fill="url(#metalRimM)"/>
+                </svg>
+            `,
+            sevenup: `
+                <svg viewBox="0 0 140 200" class="w-28 h-36 mx-auto drop-shadow-[0_10px_15px_rgba(22,163,74,0.5)]" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="sevenBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#065f46"/>
+                            <stop offset="28%" stop-color="#10b981"/>
+                            <stop offset="52%" stop-color="#34d399"/>
+                            <stop offset="82%" stop-color="#059669"/>
+                            <stop offset="100%" stop-color="#064e3b"/>
+                        </linearGradient>
+                        <linearGradient id="metalRim7" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#9ca3af"/>
+                            <stop offset="30%" stop-color="#f3f4f6"/>
+                            <stop offset="60%" stop-color="#d1d5db"/>
+                            <stop offset="100%" stop-color="#6b7280"/>
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="70" cy="188" rx="40" ry="7" fill="rgba(0,0,0,0.45)"/>
+                    <path d="M36 22 L42 14 L98 14 L104 22 Z" fill="url(#metalRim7)"/>
+                    <rect x="34" y="21" width="72" height="5" rx="2.5" fill="url(#metalRim7)"/>
+                    <!-- جسم العلبة الأخضر -->
+                    <rect x="34" y="26" width="72" height="150" rx="6" fill="url(#sevenBody)"/>
+                    <rect x="42" y="26" width="8" height="150" fill="rgba(255,255,255,0.22)"/>
+                    <!-- فقاعات ليمون منعشة -->
+                    <circle cx="52" cy="55" r="4" fill="#fef08a" opacity="0.8"/>
+                    <circle cx="88" cy="62" r="5" fill="#fef08a" opacity="0.7"/>
+                    <circle cx="56" cy="130" r="3.5" fill="#ffffff" opacity="0.6"/>
+                    <!-- شعار 7UP -->
+                    <text x="66" y="106" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-weight="900" font-size="38">7</text>
+                    <circle cx="88" cy="84" r="12" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"/>
+                    <text x="88" y="88" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-weight="900" font-size="10">UP</text>
+                    <text x="70" y="132" text-anchor="middle" fill="#ecfdf5" font-family="Cairo, sans-serif" font-weight="800" font-size="11">ليمون منعش</text>
+                    <text x="70" y="150" text-anchor="middle" fill="#a7f3d0" font-family="Cairo, sans-serif" font-weight="700" font-size="10">330 مل</text>
+                    <path d="M34 176 L42 184 L98 184 L106 176 Z" fill="url(#metalRim7)"/>
+                </svg>
+            `,
+            water: `
+                <svg viewBox="0 0 140 200" class="w-28 h-36 mx-auto drop-shadow-[0_10px_15px_rgba(56,189,248,0.4)]" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="waterBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#0284c7" stop-opacity="0.75"/>
+                            <stop offset="35%" stop-color="#bae6fd" stop-opacity="0.9"/>
+                            <stop offset="65%" stop-color="#e0f2fe" stop-opacity="0.95"/>
+                            <stop offset="100%" stop-color="#0369a1" stop-opacity="0.8"/>
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="70" cy="188" rx="32" ry="6" fill="rgba(0,0,0,0.4)"/>
+                    <!-- غطاء الزجاجة -->
+                    <rect x="56" y="12" width="28" height="12" rx="3" fill="#0284c7"/>
+                    <!-- عنق الزجاجة -->
+                    <path d="M58 24 L44 50 L96 50 L82 24 Z" fill="url(#waterBody)"/>
+                    <!-- جسم الزجاجة -->
+                    <rect x="44" y="50" width="52" height="132" rx="10" fill="url(#waterBody)" stroke="#7dd3fc" stroke-width="1.5"/>
+                    <!-- ملصق المياه -->
+                    <rect x="44" y="85" width="52" height="42" fill="#0369a1"/>
+                    <text x="70" y="106" text-anchor="middle" fill="#ffffff" font-family="Cairo, sans-serif" font-weight="900" font-size="12">مياه معدنية</text>
+                    <text x="70" y="120" text-anchor="middle" fill="#bae6fd" font-family="Cairo, sans-serif" font-weight="700" font-size="9">600 مل</text>
+                </svg>
+            `
+        };
+
+        /**
+         * بيانات المنيو الكاملة مقسمة إلى 6 أقسام مستقلة
+         */
+        const MENU_DATA = {
+            // 1. قسم البيتزا
+            pizza: [
+                { id: 'pz-1', name: 'بيتزا مارجريتا', desc: 'صلصة طماطم إيطالية، جبنة موتزاريلا، زعتر بري', badge: 'الأكثر طلباً', prices: { 'وسط': 95, 'كبير': 125, 'عائلي': 155 } },
+                { id: 'pz-2', name: 'بيتزا مشكل جبن', desc: 'موتزاريلا، شيدر، رومي قديم، كيري مع صوص البيتزا', prices: { 'وسط': 120, 'كبير': 155, 'عائلي': 190 } },
+                { id: 'pz-3', name: 'بيتزا سوسيس', desc: 'شرائح سوسيس مشوي، فلفل ألوان، زيتون، موتزاريلا', prices: { 'وسط': 115, 'كبير': 150, 'عائلي': 185 } },
+                { id: 'pz-4', name: 'بيتزا بسطرمة', desc: 'بسطرمة بلدي، طماطم، فلفل، زيتون، جبنة موتزاريلا', prices: { 'وسط': 130, 'كبير': 165, 'عائلي': 205 } },
+                { id: 'pz-5', name: 'بيتزا سجق بلدي', desc: 'سجق إسكندراني متبل، بصل، فلفل، زيتون، موتزاريلا', badge: 'مميز', prices: { 'وسط': 130, 'كبير': 165, 'عائلي': 205 } },
+                { id: 'pz-6', name: 'بيتزا فراخ رانش / باربكيو', desc: 'قطع دجاج متبلة، صوص رانش أو باربكيو، موتزاريلا', prices: { 'وسط': 135, 'كبير': 175, 'عائلي': 215 } },
+                { id: 'pz-7', name: 'بيتزا سي فود (جمبري وكاليماري)', desc: 'جمبري طازج، كاليماري، فلفل ألوان، زيتون، موتزاريلا', badge: 'إسكندراني', prices: { 'وسط': 165, 'كبير': 210, 'عائلي': 260 } },
+                { id: 'pz-8', name: 'بيتزا بابا علي سبيشيال', desc: 'ميكس لحوم وفراخ، مشروم، زيتون، إكسترا موتزاريلا', badge: 'توقيع الشيف', prices: { 'وسط': 150, 'كبير': 195, 'عائلي': 240 } }
+            ],
+
+            // 2. قسم الفطير الشرقي الحادق
+            savoryFeteer: [
+                { id: 'sf-1', name: 'فطير شرقي مشكل جبن', desc: 'خليط جبن رومي وشيدر وموتزاريلا وكيري داخل فطير مورق', prices: { 'وسط': 115, 'كبير': 150, 'عائلي': 185 } },
+                { id: 'sf-2', name: 'فطير شرقي سجق بلدي', desc: 'سجق بلدي إسكندراني مع خضار وجبنة رومي وموتزاريلا', badge: 'الأكثر مبيعاً', prices: { 'وسط': 125, 'كبير': 160, 'عائلي': 200 } },
+                { id: 'sf-3', name: 'فطير شرقي بسطرمة كيري', desc: 'بسطرمة بلدي مع جبنة كيري كريمي وموتزاريلا وزيتون', prices: { 'وسط': 130, 'كبير': 165, 'عائلي': 205 } },
+                { id: 'sf-4', name: 'فطير شرقي لحمة مفرومة', desc: 'لحمة مفرومة معصجة بالبهارات، فلفل، زيتون، جبن', prices: { 'وسط': 125, 'كبير': 160, 'عائلي': 200 } },
+                { id: 'sf-5', name: 'فطير شرقي فراخ', desc: 'قطع صدور دجاج متبلة، مشروم، فلفل ألوان، موتزاريلا', prices: { 'وسط': 130, 'كبير': 170, 'عائلي': 210 } },
+                { id: 'sf-6', name: 'فطير شرقي ميكس لحوم', desc: 'سجق، بسطرمة، لحمة مفرومة، سوسيس، ومشكل جبن', badge: 'سوبر', prices: { 'وسط': 145, 'كبير': 185, 'عائلي': 230 } },
+                { id: 'sf-7', name: 'فطير شرقي جمبري', desc: 'جمبري متبل، فلفل، زيتون، جبنة موتزاريلا ورومي', prices: { 'وسط': 160, 'كبير': 205, 'عائلي': 250 } }
+            ],
+
+            // 3. قسم الفطير المشلتت (قسم مستقل لوحده)
+            meshaltet: [
+                { id: 'ms-1', name: 'فطير مشلتت سادة (سمنة بلدي)', desc: 'فطير مشلتت فلاحي مورق 100% بالسمنة البلدي الصافي', badge: 'أصلي', prices: { 'وسط': 85, 'كبير': 120, 'عائلي': 155 } },
+                { id: 'ms-2', name: 'عرض المشلتت المتكامل', desc: 'فطيرة مشلتت سمنة بلدي + عسل أبيض + عسل أسود بالطحينة + جبنة قديمة', badge: 'توفير', prices: { 'وسط': 115, 'كبير': 150, 'عائلي': 185 } },
+                { id: 'ms-3', name: 'فطير مشلتت بالقشطة البلدي', desc: 'فطيرة مشلتت ساخنة مغطاة بطبقة غنية من القشطة الفلاحي الطازجة', prices: { 'وسط': 110, 'كبير': 145, 'عائلي': 180 } }
+            ],
+
+            // 4. قسم الفطير الحلو (قسم مستقل لوحده)
+            sweetFeteer: [
+                { id: 'sw-1', name: 'فطير حلو سكر ولبن', desc: 'فطير مورق ساخن مسقي باللبن الطازج والسكر البودرة وجوز الهند', badge: 'كلاسيك', prices: { 'وسط': 75, 'كبير': 100, 'عائلي': 130 } },
+                { id: 'sw-2', name: 'فطير حلو كاسترد وسكر', desc: 'محشو كاسترد كريمي ناعم مع رشة سكر بودرة وقرفة اختياري', prices: { 'وسط': 85, 'كبير': 115, 'عائلي': 145 } },
+                { id: 'sw-3', name: 'فطير حلو بسبوسة وقشطة', desc: 'فطير محشو بسبوسة مرملة وقشطة بلدي وعسل شربات خفيف', badge: 'الأكثر طلباً', prices: { 'وسط': 105, 'كبير': 140, 'عائلي': 175 } },
+                { id: 'sw-4', name: 'فطير حلو نوتيلا وموز', desc: 'شوكولاتة نوتيلا غنية مع شرائح الموز الطازج والمكسرات', prices: { 'وسط': 110, 'كبير': 145, 'عائلي': 180 } },
+                { id: 'sw-5', name: 'فطير بغاشة بابا علي', desc: 'كاسترد، بسبوسة، قشطة، مكسرات، وعسل نحل طبيعي', badge: 'سبيشيال', prices: { 'وسط': 120, 'كبير': 155, 'عائلي': 195 } }
+            ],
+
+            // 5. قسم المقبلات (قسم مستقل لوحده)
+            appetizers: [
+                { id: 'ap-1', name: 'باكيت بطاطس محمرة مقرمشة', desc: 'بطاطس ذهبية مقرمشة مع بهارات بابا علي الخاصة', price: 35, tag: 'ساخن' },
+                { id: 'ap-2', name: 'بطاطس بالجبنة الشيدر والهالبينو', desc: 'بطاطس محمرة مغطاة بصوص الجبنة الشيدر السائحة وفلفل هالبينو', price: 55, tag: 'مميز' },
+                { id: 'ap-3', name: 'أصابع موتزاريلا مقرمشة (5 قطع)', desc: 'أصابع جبنة موتزاريلا ذهبية مقرمشة تُقدم مع صوص مارينارا', price: 60 },
+                { id: 'ap-4', name: 'خبز بالثوم والجبنة الموتزاريلا', desc: 'شرائح خبز محمصة بزبدة الثوم والأعشاب والجبنة الموتزاريلا', price: 45 },
+                { id: 'ap-5', name: 'سلطة كول سلو', desc: 'كرنب وجزر طازج بصوص المايونيز الكريمي', price: 25 },
+                { id: 'ap-6', name: 'طبق مخلل مشكل بلدي', desc: 'تشكيلة مخللات إسكندراني تفتح النفس', price: 15 },
+                { id: 'ap-7', name: 'علبة صوص (رانش / باربكيو / شيدر / ثومية)', desc: 'صوص إضافي حسب اختيارك', price: 15 }
+            // 6. قسم المشروبات (قسم مستقل لوحده مع صور علب بيبسي وسفن أب وميرندا)
+            drinks: [
+                {
+                    id: 'dr-pepsi',
+                    name: 'علبة بيبسي (كانز)',
+                    desc: 'بيبسي مثلج منعش 330 مل',
+                    price: 20,
+                    svgKey: 'pepsi',
+                    accentBorder: 'border-blue-500/40 hover:border-blue-400',
+                    badgeText: 'مثلج',
+                    badgeColor: 'bg-blue-500/20 text-blue-300'
+                },
+                {
+                    id: 'dr-7up',
+                    name: 'علبة سفن أب (كانز)',
+                    desc: 'سفن أب بالليمون المنعش 330 مل',
+                    price: 20,
+                    svgKey: 'sevenup',
+                    accentBorder: 'border-emerald-500/40 hover:border-emerald-400',
+                    badgeText: 'مثلج',
+                    badgeColor: 'bg-emerald-500/20 text-emerald-300'
+                },
+                {
+                    id: 'dr-mirinda',
+                    name: 'علبة ميرندا برتقال (كانز)',
+                    desc: 'ميرندا بطعم البرتقال المنعش 330 مل',
+                    price: 20,
+                    svgKey: 'mirinda',
+                    accentBorder: 'border-orange-500/40 hover:border-orange-400',
+                    badgeText: 'مثلج',
+                    badgeColor: 'bg-orange-500/20 text-orange-300'
+                },
+                {
+                    id: 'dr-water',
+                    name: 'زجاجة مياه معدنية',
+                    desc: 'مياه معدنية نقية باردة 600 مل',
+                    price: 10,
+                    svgKey: 'water',
+                    accentBorder: 'border-sky-500/30 hover:border-sky-400',
+                    badgeText: 'بارد',
+                    badgeColor: 'bg-sky-500/20 text-sky-300'
+                }
+            ]
+        };
+
+        // حالة السلة والمقاسات المختارة لكل صنف متعدد المقاسات
+        let cart = [];
+        const selectedSizes = {};
+        const RESTAURANT_PHONE = '201151451784';
+        const WALLET_NUMBER = '01151451784';
+
+        // تهيئة المقاس الافتراضي (وسط) لكل الأصناف متعددة المقاسات
+        ['pizza', 'savoryFeteer', 'meshaltet', 'sweetFeteer'].forEach(cat => {
+            MENU_DATA[cat].forEach(item => {
+                selectedSizes[item.id] = 'وسط';
+            });
+        });
+
+        /**
+         * رسم بطاقات الأصناف متعددة المقاسات (البيتزا، الفطير الشرقي، المشلتت، الفطير الحلو)
+         */
+        function renderMultiSizeSection(containerId, items) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = items.map(item => {
+                const currentSize = selectedSizes[item.id] || 'وسط';
+                const currentPrice = item.prices[currentSize];
+                const sizes = Object.keys(item.prices);
+
+                return `
+                    <div class="menu-card bg-charcoal-900 border border-gray-800 hover:border-gold-500/50 rounded-2xl p-4 flex flex-col justify-between" data-name="${item.name} ${item.desc}">
+                        <div>
+                            <div class="flex items-start justify-between gap-2 mb-1.5">
+                                <h3 class="text-base sm:text-lg font-extrabold text-white leading-snug">${item.name}</h3>
+                                ${item.badge ? `<span class="shrink-0 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-gold-500/15 text-gold-400 border border-gold-500/30">${item.badge}</span>` : ''}
+                            </div>
+                            <p class="text-xs text-gray-400 leading-relaxed mb-4">${item.desc}</p>
+                        </div>
+
+                        <div class="space-y-3 pt-2 border-t border-gray-800/80">
+                            <!-- أزرار اختيار المقاس -->
+                            <div class="grid grid-cols-3 gap-1.5 bg-charcoal-950 p-1 rounded-xl border border-gray-800">
+                                ${sizes.map(size => `
+                                    <button onclick="selectSize('${item.id}', '${size}', '${containerId}')" 
+                                            class="py-1.5 px-2 rounded-lg text-xs font-extrabold transition cursor-pointer ${currentSize === size ? 'bg-gold-500 text-charcoal-950 shadow' : 'text-gray-400 hover:text-white'}">
+                                        <div>${size}</div>
+                                        <div class="text-[11px] ${currentSize === size ? 'text-charcoal-900 font-black' : 'text-gold-400'}">${item.prices[size]} ج.م</div>
+                                    </button>
+                                `).join('')}
+                            </div>
+
+                            <!-- السعر وزر الإضافة -->
+                            <div class="flex items-center justify-between">
+                                <div class="text-lg font-black text-gold-400">
+                                    ${currentPrice} <span class="text-xs font-bold text-gray-400">ج.م</span>
+                                </div>
+                                <button onclick="addToCart('${item.id}', '${item.name}', '${currentSize}', ${currentPrice})" 
+                                        class="bg-crimson-600 hover:bg-crimson-500 active:scale-95 text-white text-xs sm:text-sm font-extrabold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-md transition cursor-pointer">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span>أضف للسلة</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /**
+         * رسم بطاقات قسم المقبلات (سعر موحد لكل صنف)
+         */
+        function renderAppetizers() {
+            const container = document.getElementById('grid-appetizers');
+            container.innerHTML = MENU_DATA.appetizers.map(item => `
+                <div class="menu-card bg-charcoal-900 border border-gray-800 hover:border-emerald-500/50 rounded-2xl p-4 flex flex-col justify-between" data-name="${item.name} ${item.desc}">
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-1.5">
+                            <h3 class="text-base font-extrabold text-white">${item.name}</h3>
+                            ${item.tag ? `<span class="shrink-0 text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">${item.tag}</span>` : ''}
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">${item.desc}</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-800/80">
+                        <div class="text-lg font-black text-emerald-400">
+                            ${item.price} <span class="text-xs font-bold text-gray-400">ج.م</span>
+                        </div>
+                        <button onclick="addToCart('${item.id}', '${item.name}', '', ${item.price})" 
+                                class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs sm:text-sm font-extrabold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-md transition cursor-pointer">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>أضف للسلة</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * رسم بطاقات قسم المشروبات مع صور علب بيبسي وميرندا وسفن أب
+         */
+        function renderDrinks() {
+            const container = document.getElementById('grid-drinks');
+            container.innerHTML = MENU_DATA.drinks.map(item => `
+                <div class="menu-card bg-charcoal-900 border ${item.accentBorder} rounded-2xl p-4 flex flex-col justify-between text-center relative overflow-hidden" data-name="${item.name} ${item.desc}">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full ${item.badgeColor}">${item.badgeText}</span>
+                        <i class="fa-solid fa-snowflake text-sky-400/70 text-sm"></i>
+                    </div>
+                    
+                    <!-- صورة العلبة المرسومة بدقة -->
+                    <div class="my-2 py-2 bg-charcoal-950/60 rounded-xl border border-gray-800/70 flex items-center justify-center">
+                        ${CAN_SVGS[item.svgKey]}
+                    </div>
+
+                    <div class="mt-2">
+                        <h3 class="text-base font-extrabold text-white">${item.name}</h3>
+                        <p class="text-xs text-gray-400 mt-0.5 mb-3">${item.desc}</p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+                        <div class="text-lg font-black text-sky-400">
+                            ${item.price} <span class="text-xs font-bold text-gray-400">ج.م</span>
+                        </div>
+                        <button onclick="addToCart('${item.id}', '${item.name}', '', ${item.price})" 
+                                class="bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md transition cursor-pointer">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>أضف</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * تغيير المقاس المختار لصنف معين وإعادة رسم القسم
+         */
+        function selectSize(itemId, size, containerId) {
+            selectedSizes[itemId] = size;
+            const categoryMap = {
+                'grid-pizza': MENU_DATA.pizza,
+                'grid-savory-feteer': MENU_DATA.savoryFeteer,
+                'grid-meshaltet': MENU_DATA.meshaltet,
+                'grid-sweet-feteer': MENU_DATA.sweetFeteer
+            };
+            renderMultiSizeSection(containerId, categoryMap[containerId]);
+            filterMenu(); // الحفاظ على فلتر البحث إن وجد
+        }
+
+        /**
+         * إضافة صنف إلى سلة الطلبات
+         */
+        function addToCart(id, name, size, price) {
+            const cartKey = size ? `${id}-${size}` : id;
+            const existing = cart.find(item => item.key === cartKey);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    key: cartKey,
+                    name: name,
+                    size: size,
+                    price: price,
+                    qty: 1
+                });
+            }
+            updateCartUI();
+            showToast(`تمت إضافة "${name}${size ? ' (' + size + ')' : ''}" للسلة`);
+        }
+
+        /**
+         * تعديل الكمية داخل السلة
+         */
+        function changeQty(key, delta) {
+            const index = cart.findIndex(item => item.key === key);
+            if (index === -1) return;
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        /**
+         * تحديث واجهة السلة والعدادات
+         */
+        function updateCartUI() {
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            document.getElementById('header-cart-count').textContent = totalQty;
+            document.getElementById('float-count').textContent = totalQty;
+            document.getElementById('float-total').textContent = totalPrice;
+            document.getElementById('cart-modal-total').textContent = totalPrice;
+
+            // إظهار أو إخفاء الشريط العائم أسفل الشاشة
+            const floatBar = document.getElementById('floating-cart-bar');
+            if (totalQty > 0) {
+                floatBar.classList.remove('translate-y-28', 'opacity-0', 'pointer-events-none');
+            } else {
+                floatBar.classList.add('translate-y-28', 'opacity-0', 'pointer-events-none');
+            }
+
+            // رسم محتويات السلة داخل النافذة الجانبية
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 text-gray-500">
+                        <i class="fa-solid fa-utensils text-4xl mb-3 text-gray-700"></i>
+                        <p class="font-bold text-sm text-gray-400">سلة طلباتك فارغة حالياً</p>
+                        <p class="text-xs mt-1">اختر ما تشتهيه من البيتزا أو الفطير أو المشروبات</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="bg-charcoal-800 border border-gray-700/80 rounded-2xl p-3 flex items-center justify-between gap-3">
+                    <div class="flex-1">
+                        <div class="text-sm font-extrabold text-white">${item.name}</div>
+                        <div class="text-xs text-gray-400 mt-0.5">
+                            ${item.size ? `<span class="text-gold-400 font-bold">مقاس ${item.size}</span> • ` : ''}
+                            <span>${item.price} ج.م للقطعة</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 bg-charcoal-950 p-1 rounded-xl border border-gray-800">
+                        <button onclick="changeQty('${item.key}', 1)" class="w-7 h-7 rounded-lg bg-gold-500 text-charcoal-950 font-black flex items-center justify-center cursor-pointer">+</button>
+                        <span class="w-6 text-center text-sm font-black text-white">${item.qty}</span>
+                        <button onclick="changeQty('${item.key}', -1)" class="w-7 h-7 rounded-lg bg-charcoal-800 hover:bg-crimson-600 text-white font-black flex items-center justify-center cursor-pointer">-</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * فتح/إغلاق نافذة السلة
+         */
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        /**
+         * فتح وإغلاق نافذة طرق الدفع (إنستاباي / محفظة)
+         */
+        function openPaymentModal() {
+            document.getElementById('payment-modal').classList.remove('hidden');
+        }
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+        }
+
+        /**
+         * نسخ رقم المحفظة وإنستاباي 01151451784
+         */
+        function copyWalletNumber() {
+            copyTextFallback(WALLET_NUMBER);
+            showToast(`تم نسخ رقم التحويل (${WALLET_NUMBER}) بنجاح!`);
+        }
+
+        /**
+         * إظهار رقم المحفظة داخل السلة عند اختيار الدفع الإلكتروني
+         */
+        function togglePaymentHint() {
+            const selected = document.querySelector('input[name="payment-method"]:checked')?.value || '';
+            const hintBox = document.getElementById('wallet-inline-box');
+            if (selected.includes('01151451784')) {
+                hintBox.classList.remove('hidden');
+            } else {
+                hintBox.classList.add('hidden');
+            }
+        }
+
+        /**
+         * فتح وإغلاق نافذة تتبع الطلب
+         */
+        function openTrackModal() {
+            const savedOrder = JSON.parse(localStorage.getItem('baba_ali_last_order') || 'null');
+            if (savedOrder) {
+                document.getElementById('tracked-order-id').textContent = `${savedOrder.id} (${savedOrder.total} ج.م)`;
+                document.getElementById('track-input').value = savedOrder.id;
+            }
+            document.getElementById('track-modal').classList.remove('hidden');
+        }
+        function closeTrackModal() {
+            document.getElementById('track-modal').classList.add('hidden');
+        }
+
+        /**
+         * البحث عن حالة الطلب في نافذة التتبع
+         */
+        function searchOrderStatus() {
+            const query = document.getElementById('track-input').value.trim();
+            if (!query) {
+                showToast('من فضلك أدخل رقم الطلب أو رقم الموبايل');
+                return;
+            }
+            const savedOrder = JSON.parse(localStorage.getItem('baba_ali_last_order') || 'null');
+            if (savedOrder && (savedOrder.id.toLowerCase() === query.toLowerCase() || savedOrder.phone === query)) {
+                document.getElementById('tracked-order-id').textContent = `${savedOrder.id} - ${savedOrder.name || 'عميل بابا علي'}`;
+                showToast('تم العثور على طلبك! جاري التحضير الآن');
+            } else {
+                document.getElementById('tracked-order-id').textContent = `طلب رقم #${query}`;
+                showToast('تم تحديث حالة التتبع');
+            }
+        }
+
+        /**
+         * بناء نص الطلب لإرساله عبر واتساب أو ماسنجر وحفظ رقم التتبع
+         */
+        function buildOrderMessage() {
+            if (cart.length === 0) return null;
+            const name = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+            const notes = document.getElementById('customer-notes').value.trim();
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value || 'كاش عند الاستلام';
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // إنشاء رقم تتبع تلقائي للطلب وحفظه ليتمكن العميل من تتبعه
+            const orderId = 'BA-' + Math.floor(1000 + Math.random() * 9000);
+            localStorage.setItem('baba_ali_last_order', JSON.stringify({
+                id: orderId,
+                name,
+                phone,
+                total: totalPrice,
+                time: new Date().toLocaleTimeString('ar-EG')
+            }));
+
+            let lines = [
+                `🍕 *طلب جديد (${orderId}) - مطعم بابا علي* 🥧`,
+                '------------------------'
+            ];
+            cart.forEach((item, idx) => {
+                const sizeLabel = item.size ? ` (${item.size})` : '';
+                lines.push(`${idx + 1}. ${item.name}${sizeLabel} × ${item.qty} = ${item.price * item.qty} ج.م`);
+            });
+            lines.push('------------------------');
+            lines.push(`💰 *الإجمالي:* ${totalPrice} ج.م`);
+            lines.push(`💳 *طريقة الدفع:* ${paymentMethod}`);
+            if (name) lines.push(`👤 *الاسم:* ${name}`);
+            if (phone) lines.push(`📞 *الموبايل:* ${phone}`);
+            if (address) lines.push(`📍 *العنوان:* ${address}`);
+            if (notes) lines.push(`📝 *ملاحظات:* ${notes}`);
+
+            return lines.join('\n');
+        }
+
+        /**
+         * إرسال الطلب عبر واتساب (01151451784) أو ماسنجر
+         */
+        function sendOrder(platform) {
+            const message = buildOrderMessage();
+            if (!message) {
+                showToast('من فضلك أضف أصنافاً للسلة أولاً');
+                return;
+            }
+            const encoded = encodeURIComponent(message);
+            if (platform === 'whatsapp') {
+                window.open(`https://wa.me/${RESTAURANT_PHONE}?text=${encoded}`, '_blank');
+            } else if (platform === 'messenger') {
+                copyTextFallback(message);
+                showToast('تم نسخ الطلب! الصقه الآن في محادثة ماسنجر');
+                setTimeout(() => {
+                    window.open('https://m.me/', '_blank');
+                }, 800);
+            }
+        }
+
+        /**
+         * نسخ نص الطلب للحافظة
+         */
+        function copyOrderText() {
+            const message = buildOrderMessage();
+            if (!message) {
+                showToast('السلة فارغة حالياً');
+                return;
+            }
+            copyTextFallback(message);
+            showToast('تم نسخ تفاصيل الطلب بنجاح!');
+        }
+
+        function copyTextFallback(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        /**
+         * إظهار إشعار Toast أنيق
+         */
+        let toastTimeout;
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+            document.getElementById('toast-message').textContent = msg;
+            box.classList.remove('opacity-0', '-translate-y-4');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                box.classList.add('opacity-0', '-translate-y-4');
+            }, 2400);
+        }
+
+        /**
+         * فلترة الأصناف بالبحث المباشر
+         */
+        function filterMenu() {
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            const cards = document.querySelectorAll('.menu-card');
+            cards.forEach(card => {
+                const text = card.getAttribute('data-name').toLowerCase();
+                card.style.display = text.includes(query) ? '' : 'none';
+            });
+
+            // إخفاء القسم بالكامل إذا لم يحتوي على أي نتائج مطابقة للبحث
+            document.querySelectorAll('.menu-section').forEach(section => {
+                const visibleCards = Array.from(section.querySelectorAll('.menu-card')).filter(c => c.style.display !== 'none');
+                section.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
+        }
+
+        /**
+         * تمييز زر القسم النشط أثناء التمرير (Scroll Spy)
+         */
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('.menu-section');
+            const navPills = document.querySelectorAll('.nav-pill');
+
+            window.addEventListener('scroll', () => {
+                let currentId = '';
+                sections.forEach(sec => {
+                    const top = sec.offsetTop - 160;
+                    if (window.scrollY >= top) {
+                        currentId = sec.getAttribute('id');
+                    }
+                });
+
+                if (currentId) {
+                    navPills.forEach(pill => {
+                        if (pill.getAttribute('data-target') === currentId) {
+                            pill.classList.remove('bg-charcoal-800', 'text-gray-300');
+                            pill.classList.add('bg-gold-500', 'text-charcoal-950');
+                        } else {
+                            pill.classList.remove('bg-gold-500', 'text-charcoal-950');
+                            pill.classList.add('bg-charcoal-800', 'text-gray-300');
+                        }
+                    });
+                }
+            });
+        }
+
+        // تشغيل التهيئة عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMultiSizeSection('grid-pizza', MENU_DATA.pizza);
+            renderMultiSizeSection('grid-savory-feteer', MENU_DATA.savoryFeteer);
+            renderMultiSizeSection('grid-meshaltet', MENU_DATA.meshaltet);
+            renderMultiSizeSection('grid-sweet-feteer', MENU_DATA.sweetFeteer);
+            renderAppetizers();
+            renderDrinks();
+            updateCartUI();
+            setupScrollSpy();
+        });
+    </script>
+</body>
+</html>
